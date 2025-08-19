@@ -6,6 +6,11 @@ public class ShopCounterSystem {
     static Scanner sc = new Scanner(System.in);
 
     public static void main(String[] args) {
+
+    }
+
+    void login()
+    {
         System.out.println("=== Shop Counter System ===");
         System.out.println("1. Admin");
         System.out.println("2. Counterperson");
@@ -14,17 +19,26 @@ public class ShopCounterSystem {
         sc.nextLine();
         switch (choice) {
             case 1:
-                System.out.println("Welcome Admin!");
-                while (true) {
-                    new ShopCounterSystem().adminMenu();
+                System.out.println("=== Login ===");
+                System.out.print("Enter username: ");
+                String username = sc.nextLine();
+                System.out.print("Enter password: ");
+                String password = sc.nextLine();
+                if (username.equals("admin") && password.equals("admin123")) {
+                    System.out.println("Login successful!");
+                } else {
+                    System.out.println("Invalid credentials. Exiting...");
                 }
+                adminMenu();
+                break;
+
             case 2:
-                System.out.println("Welcome Counterperson!");
-                // Implement counterperson functionality here
+                counterPersonMenu();
                 break;
             default:
                 System.out.println("Invalid choice. Exiting...");
         }
+
 
     }
 
