@@ -120,8 +120,7 @@ public class ShopCounterSystem {
         }
     }
 
-    void removeItem()
-    {
+    void removeItem() {
         System.out.print("Enter item number to remove: ");
         if (itemCount == 0) {
             System.out.println("No items to remove.");
@@ -141,8 +140,7 @@ public class ShopCounterSystem {
         System.out.println("Item removed successfully.");
     }
 
-    void updateItem()
-    {
+    void updateItem() {
         if (itemCount == 0) {
             System.out.println("No items to update.");
             return;
@@ -190,7 +188,120 @@ public class ShopCounterSystem {
         }
     }
 
+    void counterPersonMenu() {
+        System.out.println("=== Counterperson Menu ===");
+        System.out.println("1. Start Billing");
+        System.out.println("2. Switch User");
+        System.out.println("3. Exit");
+        System.out.print("Enter Your Choice: ");
+        int choice = sc.nextInt();
+        sc.nextLine();
+        switch (choice) {
+            case 1:
+                billProcess();
+                break;
+            case 2:
+                System.out.println("Switching user...");
+                break;
+            case 3:
+                System.out.println("Exiting...");
+                System.exit(0);
+            default:
+                System.out.println("Invalid choice. Please try again.");
+        }
 
+    }
+
+    void billProcess() {
+        Items[] broughtItems = new Items[100];
+        int broughtItemCount = 0;
+        double total = 0.0;
+
+        System.out.println("=== Welcome to Mega Mart ===");
+        System.out.println("Please select items to purchase:");
+        displayInventory();
+        System.out.print("Enter item number to purchase (0 to finish): ");
+        int itemNumber = sc.nextInt();
+        sc.nextLine();
+        while (itemNumber != 0) {
+            if (itemNumber < 1 || itemNumber > itemCount) {
+                System.out.println("Invalid item number. Please try again.");
+            } else {
+                Items selectedItem = inventory[itemNumber - 1];
+                System.out.print("Enter quantity for " + selectedItem.getName() + ": ");
+                int quantity = sc.nextInt();
+                sc.nextLine();
+                if (quantity > selectedItem.getQuantity()) {
+                    System.out.println("Insufficient stock for " + selectedItem.getName() + ".");
+                } else {
+                    selectedItem.setQuantity(selectedItem.getQuantity() - quantity);
+                    double itemTotal = selectedItem.getPrice() * quantity;
+                    total += itemTotal;
+                    broughtItems[broughtItemCount++] = new Items(selectedItem.getName(), selectedItem.getPrice(), quantity);
+                    System.out.println("Added " + quantity + " of " + selectedItem.getName() + " to your cart.");
+                }
+            }
+            System.out.print("Enter item number to purchase (0 to finish): ");
+            itemNumber = sc.nextInt();
+            sc.nextLine();
+            if (itemNumber == 0) {
+                takeMoney(total);
+                printReceipt(broughtItems, broughtItemCount, total);
+            }
+        }
+
+
+    }
+
+    void printReceipt(Items[] items, int count, double total) {
+        System.out.println("=== Receipt ===");
+        for (int i = 0; i < count; i++) {
+            Items item = items[i];
+            System.out.printf("%s - $%.2f x %d = $%.2f\n", item.getName(), item.getPrice(), item.getQuantity(), item.getPrice() * item.getQuantity());
+        }
+        System.out.printf("Total: $%.2f\n", total);
+        System.out.println("Thank you for shopping with us!");
+    }
+
+    void takeMoney(double total) {
+        System.out.println("=== Cash Mode ===");
+        System.out.println("Select Payment Method:");
+        System.out.println("1. Cash");
+        System.out.println("2. UPI");
+        System.out.println("3. Card");
+        System.out.print("Enter your choice: ");
+        int choice = sc.nextInt();
+        sc.nextLine();
+        switch (choice) {
+            case 1:
+                System.out.println("Please pay the total amount of $" + total);
+                System.out.println("Please enter the amount paid: ");
+                double amountPaid = sc.nextDouble();
+                sc.nextLine();
+                if (amountPaid < total) {
+                    System.out.println("Insufficient amount paid. Payment failed.");
+                    return;
+                } else if (amountPaid >= total) {
+                    double change = amountPaid - total;
+                    System.out.printf("Return change $%.2f\n", change);
+                }
+                System.out.println("Payment successful. Thank you!");
+                break;
+            case 2:
+                System.out.println("Please complete your UPI payment of $" + total);
+                System.out.println("Payment successful. Thank you!");
+                break;
+            case 3:
+                System.out.println("Please swipe your card to pay $" + total);
+                System.out.println("Payment successful. Thank you!");
+                break;
+            default:
+                System.out.println("Invalid choice. Payment failed.");
+        }
+        System.out.println("Exiting billing process...");
+
+
+    }
 
 }
 
