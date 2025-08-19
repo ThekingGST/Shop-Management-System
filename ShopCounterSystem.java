@@ -9,6 +9,12 @@ public class ShopCounterSystem {
 
     }
 
+    void initializeSampleData() {
+        addItemtoInventory(new Items("Laptop", 999.99, 5));
+        addItemtoInventory(new Items("Mouse", 25.50, 10));
+        addItemtoInventory(new Items("Keyboard", 75.00, 8));
+        addItemtoInventory(new Items("Monitor", 299.99, 3));
+    }
     void login()
     {
         System.out.println("=== Shop Counter System ===");
