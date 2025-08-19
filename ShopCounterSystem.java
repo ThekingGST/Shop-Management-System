@@ -6,7 +6,11 @@ public class ShopCounterSystem {
     static Scanner sc = new Scanner(System.in);
 
     public static void main(String[] args) {
-
+        ShopCounterSystem system = new ShopCounterSystem();
+        system.initializeSampleData();
+        while (true) {
+            system.login();
+        }
     }
 
     void initializeSampleData() {
