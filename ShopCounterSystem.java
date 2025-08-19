@@ -36,15 +36,19 @@ public class ShopCounterSystem {
                 String password = sc.nextLine();
                 if (username.equals("admin") && password.equals("admin123")) {
                     System.out.println("Login successful!");
+                    while (true) {
+                        adminMenu();
+                    }
                 } else {
                     System.out.println("Invalid credentials. Exiting...");
                 }
-                adminMenu();
                 break;
 
             case 2:
-                counterPersonMenu();
-                break;
+                System.out.println("=== Counterperson Login ===");
+                while (true) {
+                    counterPersonMenu();
+                }
             default:
                 System.out.println("Invalid choice. Exiting...");
         }
@@ -103,6 +107,7 @@ public class ShopCounterSystem {
                 break;
             case 4:
                 System.out.println("Switching user...");
+                login();
                 break;
             case 5:
                 System.out.println("Exiting...");
@@ -226,6 +231,7 @@ public class ShopCounterSystem {
                 break;
             case 2:
                 System.out.println("Switching user...");
+                login();
                 break;
             case 3:
                 System.out.println("Exiting...");
@@ -271,6 +277,7 @@ public class ShopCounterSystem {
             if (itemNumber == 0) {
                 takeMoney(total);
                 printReceipt(broughtItems, broughtItemCount, total);
+                break;
             }
         }
 
@@ -384,4 +391,3 @@ class Items {
         }
     }
 }
-
