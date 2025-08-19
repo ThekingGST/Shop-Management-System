@@ -45,7 +45,6 @@ public class ShopCounterSystem {
                 break;
 
             case 2:
-                System.out.println("=== Counterperson Login ===");
                 while (true) {
                     counterPersonMenu();
                 }
@@ -60,7 +59,6 @@ public class ShopCounterSystem {
         if (itemCount < inventory.length) {
             inventory[itemCount] = item;
             itemCount++;
-            System.out.println("Item added");
         } else {
             System.out.println("Inventory is full.");
         }
@@ -68,7 +66,7 @@ public class ShopCounterSystem {
 
 
     void adminMenu() {
-        System.out.println("=== Admin Menu ===");
+        System.out.println("\n=== Admin Menu ===");
         System.out.println("1. View Inventory");
         System.out.println("2. Update Inventory");
         System.out.println("3. Manage Counterpersons");
@@ -118,7 +116,7 @@ public class ShopCounterSystem {
     }
 
     void displayInventory() {
-        System.out.println("=== Inventory ===");
+        System.out.println("\n=== Inventory ===");
         if (itemCount == 0) {
             System.out.println("No items in inventory.");
             return;
@@ -218,7 +216,7 @@ public class ShopCounterSystem {
     }
 
     void counterPersonMenu() {
-        System.out.println("=== Counterperson Menu ===");
+        System.out.println("\n=== Counterperson Menu ===");
         System.out.println("1. Start Billing");
         System.out.println("2. Switch User");
         System.out.println("3. Exit");
@@ -247,7 +245,7 @@ public class ShopCounterSystem {
         int broughtItemCount = 0;
         double total = 0.0;
 
-        System.out.println("=== Welcome to Mega Mart ===");
+        System.out.println("\n=== Welcome to Mega Mart ===");
         System.out.println("Please select items to purchase:");
         displayInventory();
         System.out.print("Enter item number to purchase (0 to finish): ");
@@ -285,7 +283,7 @@ public class ShopCounterSystem {
     }
 
     void printReceipt(Items[] items, int count, double total) {
-        System.out.println("=== Receipt ===");
+        System.out.println("\n=== Receipt ===");
         for (int i = 0; i < count; i++) {
             Items item = items[i];
             System.out.printf("%s - $%.2f x %d = $%.2f\n", item.getName(), item.getPrice(), item.getQuantity(), item.getPrice() * item.getQuantity());
@@ -295,7 +293,7 @@ public class ShopCounterSystem {
     }
 
     void takeMoney(double total) {
-        System.out.println("=== Cash Mode ===");
+        System.out.println("\n=== Cash Mode ===");
         System.out.println("Select Payment Method:");
         System.out.println("1. Cash");
         System.out.println("2. UPI");
