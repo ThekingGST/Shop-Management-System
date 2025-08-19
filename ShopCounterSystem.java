@@ -1,12 +1,38 @@
 import java.util.Scanner;
 
 public class ShopCounterSystem {
+    private static Items[] inventory = new Items[100];
+    private static int itemCount = 0;
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         System.out.println("=== Shop Counter System ===");
         System.out.println("1. Admin");
         System.out.println("2. Counterperson");
         System.out.print("Choose role: ");
+    }
+
+    void addItemtoInventory(Items item) {
+        if (itemCount < inventory.length) {
+            inventory[itemCount] = item;
+            itemCount++;
+            System.out.println("Item added");
+        } else {
+            System.out.println("Inventory is full.");
+        }
+    }
+
+    void displayInventory() {
+        System.out.println("=== Inventory ===");
+        if (itemCount == 0) {
+            System.out.println("No items in inventory.");
+            return;
+        }
+        System.out.println("Inventory:");
+        for (int i = 0; i < itemCount; i++) {
+            Items item = inventory[i];
+            System.out.printf("%d. %s - $%.2f (Quantity: %d)\n", i + 1, item.getName(), item.getPrice(), item.getQuantity());
+        }
     }
 }
 
