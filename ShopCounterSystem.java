@@ -69,7 +69,7 @@ public class ShopCounterSystem {
         System.out.println("\n=== Admin Menu ===");
         System.out.println("1. View Inventory");
         System.out.println("2. Update Inventory");
-        System.out.println("3. Manage Counterpersons");
+        System.out.println("3. View Low Stock Items");
         System.out.println("4. Switch User");
         System.out.println("5. Exit");
         System.out.print("Enter Your Choice: ");
@@ -101,7 +101,7 @@ public class ShopCounterSystem {
                 }
                 break;
             case 3:
-                System.out.println("Implementing Soon.");
+                viewLowStockItems();
                 break;
             case 4:
                 System.out.println("Switching user...");
@@ -212,6 +212,21 @@ public class ShopCounterSystem {
             default:
                 System.out.println("Invalid choice.");
                 return;
+        }
+    }
+
+    void viewLowStockItems() {
+        System.out.println("\n=== Low Stock Alert (Quantity <= 5) ===");
+        boolean foundLowStock = false;
+
+        for (int i = 0; i < itemCount; i++) {
+            if (inventory[i].getQuantity() <= 5) {
+                System.out.printf("%d. %s - Quantity: %d\n", i + 1, inventory[i].getName(), inventory[i].getQuantity());
+                foundLowStock = true;
+            }
+        }
+        if (!foundLowStock) {
+            System.out.println("No low stock items found.");
         }
     }
 
